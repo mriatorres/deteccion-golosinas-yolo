@@ -1,4 +1,4 @@
-8# 🍫 Detección de Golosinas y Estimación Calórica usando YOLO y Transfer Learning
+# 🍫 Detección de Golosinas y Estimación Calórica usando YOLO y Transfer Learning
 
 Este proyecto implementa un modelo de **detección de objetos** basado en **YOLOv8** para identificar diferentes tipos de golosinas y estimar sus **calorías aproximadas** a partir de imágenes o video en tiempo real.
 
@@ -67,7 +67,9 @@ Ve a Entorno de ejecución → Cambiar tipo de entorno de ejecución → Acelera
 
 Verifica que la GPU esté disponible:
 
+```yaml
 !nvidia-smi
+```
 
 
 Instala YOLO (Ultralytics):
@@ -81,7 +83,9 @@ Entrenamiento del modelo
 
 Ejecuta el siguiente comando para entrenar:
 
+```yaml
 !yolo detect train data=/content/data.yaml model=yolo11s.pt epochs=60 imgsz=640
+```
 
 
 Durante el entrenamiento se generan métricas de desempeño como:
@@ -112,7 +116,9 @@ Estas gráficas muestran el comportamiento del modelo en términos de precisión
 
 Para evaluar el modelo sobre imágenes de validación:
 
+```yaml
 !yolo detect predict model=runs/detect/train/weights/best.pt source=data/validation/images save=True
+```
 
 
 Visualiza los resultados:
@@ -184,9 +190,9 @@ Recall	Capacidad de encontrar todos los objetos	↑ Alta (0.88)
 mAP@0.5	Precisión promedio general	↑ Muy buena ( 
 0.91)
 
+![Grafica Metricas del modelo](https://drive.google.com/file/d/1LsDhW_qLszgUw51LCB2zDVWdWbclyrii/view?usp=drivesdk)
 
-
-🧩 Conclusiones
+## 🧩 Conclusiones
 
 El modelo YOLO logró una alta precisión en la detección de golosinas, diferenciando correctamente las cuatro clases.
 
