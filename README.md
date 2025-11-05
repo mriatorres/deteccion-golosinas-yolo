@@ -1,4 +1,4 @@
-# 🍫 Detección de Golosinas y Estimación Calórica usando YOLO y Transfer Learning
+8# 🍫 Detección de Golosinas y Estimación Calórica usando YOLO y Transfer Learning
 
 Este proyecto implementa un modelo de **detección de objetos** basado en **YOLOv8** para identificar diferentes tipos de golosinas y estimar sus **calorías aproximadas** a partir de imágenes o video en tiempo real.
 
@@ -72,7 +72,6 @@ Verifica que la GPU esté disponible:
 
 Instala YOLO (Ultralytics):
 
-!pip install ultralytics
 
 ```yaml
 !pip install ultralytics
@@ -95,7 +94,7 @@ Recall
 
 mAP (mean Average Precision)
 
-📊 Evaluación del modelo
+## 📊 Evaluación del modelo
 
 Una vez entrenado, YOLO crea una carpeta runs/detect/train/ con resultados:
 
@@ -109,7 +108,7 @@ weights/best.pt: pesos finales del modelo
 
 Estas gráficas muestran el comportamiento del modelo en términos de precisión, recall, pérdida y mAP, que sirven como indicadores del rendimiento alcanzado.
 
-🔍 Prueba y predicción
+## 🔍 Prueba y predicción
 
 Para evaluar el modelo sobre imágenes de validación:
 
@@ -118,6 +117,7 @@ Para evaluar el modelo sobre imágenes de validación:
 
 Visualiza los resultados:
 
+```yaml
 import glob
 from IPython.display import Image, display
 
@@ -125,10 +125,15 @@ for image_path in glob.glob(f'/content/runs/detect/predict/*.jpg')[:10]:
   display(Image(filename=image_path, height=400))
   print('\n')
 
-💾 Guardar y descargar el modelo entrenado
+```
+
+## 💾 Guardar y descargar el modelo entrenado
+
+```yaml
 !mkdir /content/my_model
 !cp /content/runs/detect/train/weights/best.pt /content/my_model/my_model.pt
 !cp -r /content/runs/detect/train /content/my_model
+
 
 %cd my_model
 !zip /content/my_model.zip my_model.pt
@@ -138,41 +143,48 @@ for image_path in glob.glob(f'/content/runs/detect/predict/*.jpg')[:10]:
 from google.colab import files
 files.download('/content/my_model.zip')
 
-🎥 Inferencia con cámara web (local)
+```
 
-En tu entorno local (Windows):
+## 🎥 Inferencia con cámara web (local)
 
-Activa tu entorno:
+En su entorno local (Windows):
 
+Cree un entorno y activelo:
+
+```yaml
+conda create yolo-env1 python=3.11
 conda activate yolo-env1
+```
 
+Descargue el script de detección:
 
-Descarga el script de detección:
-
+```yaml
 curl -o yolo_detect.py https://raw.githubusercontent.com/EdjeElectronics/Train-and-Deploy-YOLO-Models/refs/heads/main/yolo_detect.py
+```
 
+Ejecute el modelo con su cámara:
 
-Ejecuta el modelo con tu cámara:
-
+```yaml
 python yolo_detect.py --model my_model.pt --source 0 --resolution 1280x720
+```
 
 
-Para detener la ejecución, presiona Ctrl + C en la terminal.
+Para detener la ejecución, presione Ctrl + C en la terminal.
 
-📈 Tabla de resultados (Métricas del modelo)
-Métrica	Descripción	Valor aproximado
+
+## 📈 Tabla de resultados (Métricas del modelo)
+
+### Métrica	Descripción	Valor aproximado
+
 Loss (Train/Val)	Error durante entrenamiento	↓ Estable y decreciente
-Precision	Exactitud de detección	↑ Alta (ej. 0.90)
-Recall	Capacidad de encontrar todos los objetos	↑ Alta (ej. 0.88)
-mAP@0.5	Precisión promedio general	↑ Muy buena (ej. 0.91)
 
-Incluye en tu presentación los gráficos generados automáticamente:
+Precision	Exactitud de detección	↑ Alta (0.90)
+Recall	Capacidad de encontrar todos los objetos	↑ Alta (0.88)
 
-results.png (curvas de loss, precision, recall, mAP)
+mAP@0.5	Precisión promedio general	↑ Muy buena ( 
+0.91)
 
-PR_curve.png (curva precisión-recall)
 
-confusion_matrix.png (errores de clasificación)
 
 🧩 Conclusiones
 
@@ -183,15 +195,3 @@ El transfer learning permitió obtener buenos resultados con pocas épocas.
 Las métricas y curvas de entrenamiento muestran un buen equilibrio entre precisión y recall.
 
 Este modelo puede ser extendido para sistemas de control calórico automático o aplicaciones móviles de reconocimiento alimentario.
-
-👩‍💻 Autora del proyecto
-
-Nombre: Marleny
-Proyecto: Detección de Golosinas y Estimación Calórica usando YOLO y Transfer Learning
-Fecha: Noviembre 2025
-Entorno: Google Colab + Python (Ultralytics YOLO)
-
-
----
-
-¿Quieres que te genere una **versión con enlaces e imágenes (por ejemplo, los gráficos y capturas de resultado
